@@ -1,0 +1,77 @@
+Overview
+--------
+
+This program is used to extract data fro a database and store it in XML format.The XML form would then be input into an XSLT parser that would be used for report extraction.
+A summary of the formatting requirements are in the csci 3901 course assignment #5 information in the course's brightspace space.
+
+Files and external data:
+-----------------------
+
+There are two main files:
+  - FetchData.java  -- main program that contains the calling method
+  - DatabaseOperations.java -- class that is responsible for establishing a connection, extracting information from the database and storing it in a data structure
+								This program is called from the main class
+  - XMLWriter.java -- class that is used to create an XML form and input data in the format specified
+						This class is called from
+
+The directory contains following versions of the code:
+
+directory version -- Updated code to work on bluenose.cs.dal.ca
+
+Data structures & methods:
+---------------------------
+-Arraylist custInfoList-data structure used to store each customers information as a hash map in key value pairs 
+-Arraylist productInfoList-data structure used to store each products information as a hash map in key value pairs
+-Arraylist employeeInfoList-data structure used to store each employees information as a hash map in key value pairs
+
+Methods:
+------
+Class DatabaseOperations
+	-connectSQL()
+		Establish a connection with the database server
+	-runQuery()
+		Accept as an input from the customer the start and end dates for the report and the name of the XML file to store the data
+		Run the SQL query to fetch the information from the database and store it in the respective arraylists
+	-xmlWriter()
+		call the xmlWriter function and pass the arraylists as an input parameter
+Class XMLWriter
+	-xmlWriter
+		create the xml document structure and input data from the arraylists into the xml form
+
+Assumptions:
+-----------
+
+  - All dates are input in the form YYYY-MM-DD.
+  - If data is not available for the input date period a blank XML will be created with only the default tags.
+  - User is prompted to input the xml filename and not the complete file path
+  
+Input:
+-------
+startDate and endDate in format YYYY-MM-DD
+xmlFile will be in the absolute format Eg:C:\Users\Ryan\xmlFile.xml
+  
+Choices
+-------
+
+  - User is prompted to enter start and end dates for report and filename
+
+Key algorithms and design elements
+----------------------------------
+
+Establish a connection with the database using the default JDBC ODBC MySQL driver
+Accept as an input from the user that start and end dates for report extraction also accept the output filename for the XML document
+Based upon input duration run SQL query to extract customer information
+In the result set store each row in an a index of a arraylist in the form of a hashmap
+Based upon input duration run SQL query to extract product information
+In the result set store each row in an a index of a arraylist in the form of a hashmap
+Based upon input duration run SQL query to extract employee information
+In the result set store each row in an a index of a arraylist in the form of a hashmap
+Pass each of the arraylists,startDate,endDate and xmlFileName variables to the xmlWriter class
+If no data is available for the date duration input by the user simply pass blank data structures to the xmlWriter class
+Create an xml document using DocumentBuilderFactory java class
+Create xml elements using Element class and append them as per the xml tree structure
+If the arraylists are blank it means no data is available for that specified duration hence do not print the xml tags asociated with that arraylist
+
+Limitations
+-----------
+
