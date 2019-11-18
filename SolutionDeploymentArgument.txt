@@ -1,0 +1,5 @@
+The solution is ready for deployment as it follows all the guidelines as stated in Assignment #5 worksheet specified in brightspace under Software development concepts.
+Based upon user input date duration all the associated data of customers,products and employees is extracted and stored in an xml file.
+For durations where there is no date found the output xml is only filled with default xml tags indicating 0 purchases made during the period
+All exceptions have been handled at the database level for situations when a connection cannnot be established with the database server
+All forms of data have been extracted and inserted into the xml form to ensure that there is no irregularity in xml formation
